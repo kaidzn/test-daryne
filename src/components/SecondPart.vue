@@ -36,14 +36,32 @@
                     
                     <div class="hearts">
                         <div v-for="heart in hearts" :key="heart">
-                            <a>❤️</a>
+                            <a>
+                                <svg width="29" height="25" viewBox="0 0 29 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_i_1688_47894)">
+<path d="M7.95361 0C4.08309 0 0.944336 3.10651 0.944336 6.93918C0.944336 10.0331 2.17096 17.376 14.2451 24.7988C14.4614 24.9304 14.7097 25 14.9629 25C15.216 25 15.4643 24.9304 15.6806 24.7988C27.7548 17.376 28.9814 10.0331 28.9814 6.93918C28.9814 3.10651 25.8427 0 21.9721 0C18.1016 0 14.9629 4.20556 14.9629 4.20556C14.9629 4.20556 11.8241 0 7.95361 0Z" fill="#FF3D32"/>
+</g>
+<defs>
+<filter id="filter0_i_1688_47894" x="0.944336" y="0" width="28.0371" height="27" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feGaussianBlur stdDeviation="1.85"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.960265 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_1688_47894"/>
+</filter>
+</defs>
+</svg>
+</a>
                         </div>
                     </div>
                     <p>1 мүмкіндік = 1 бонус</p>
                     
                 </div>
                 <div class="finish-quiz">
-                    <p>Барлық Сұрақтар</p>
+                    <p class="finish-txt">Барлық Сұрақтар</p>
                     <div class="question-buttons">
                         <button v-for="(question, index) in questions" :key="index"
                         :class="{ 'answered': index < currentQuestionIndex, 'correct': isCorrect(index) }"
@@ -51,7 +69,8 @@
                         {{ index + 1 }}
                     </button>
                 </div>
-                <button class="finish-btn" @click="finishTest">Аяқтау</button>
+                <button class="finish-btn" 
+                 @click="finishTest">Аяқтау</button>
             </div>
         </div>
                 
@@ -105,8 +124,8 @@ export default {
         nextQuestion() {
             if (this.currentQuestionIndex < this.questions.length - 1) {
                 this.currentQuestionIndex++;
-                this.isAnswerCorrect = false; 
             }
+            this.selectedOption = null; 
         },
         setCurrentQuestion(index) {
             this.currentQuestionIndex = index;
@@ -138,29 +157,15 @@ export default {
     justify-content: space-between;
     margin-top: 1.2rem;
 }
-.question-buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-.question-buttons button{
-    border-radius: 15px;
-    border: #cccccc solid 2px;
-    width: 45px;
-    height: 41px;
-}
 
-.correct {
-    border: 2px solid rgb(120, 232, 120);
-    background-color: rgb(120, 232, 120);
-}
 .progress-bar-container{
     width: 700px;
 }
 .progress-bar {
     margin: 0 auto;
     width: 100%;
-    height: 20px;
+    height: 16px;
+    margin-bottom: 32px;
     background-color: #ccc;
     border-radius: 1rem;
 }
@@ -169,16 +174,19 @@ export default {
     height: 100%;
     background-color: #609AF8; 
     border-radius: 1rem;
+
 }
 
 .left  {
     display: flex;
-    width: 800px;
-    height: 400px;
+    justify-content: center;
+    width: 900px;
+    height: 522px;
     background-color: #fff;
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 15px;
 }
+
 .check-btn{
     padding: 8px 32px;
     background-color: #609AF8;
@@ -207,6 +215,41 @@ export default {
     align-items: center;
 }
 
+.points{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 15px;
+    width: 270px;
+    height: 100px;
+}
+.hearts {
+    display: flex;
+    font-size: 2rem;
+}
+
+.question-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.question-buttons button{
+    border-radius: 8px;
+    border: rgba(0, 0, 0, 0.08) solid 1px;
+    background-color: #fff;
+    width: 45px;
+    height: 41px;
+}
+
+.correct {
+    border: 1px solid rgb(120, 232, 120);
+    background-color: rgb(120, 232, 120) !important;
+}
+
 .all-questions {
     margin-top: 20px;
     p{
@@ -223,34 +266,30 @@ export default {
     div{
         label{
             input{
-                margin: 1rem 0;
+                margin: 1.5rem 0;
             }
         }
     }
 }
-.points{
+.options label{
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: spa;
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 15px;
-    width: 300px;
-    height: 100px;
 }
-.hearts {
-    display: flex;
-    font-size: 2rem;
+.options input[type="radio"] {
+    transform: scale(1.5);
+    margin-right: 10px;
 }
+
 .finish-quiz{
     display: flex;
     flex-direction: column;
+    text-align: start;
     justify-content: center;
-    width: 300px;
+    align-items: center;
+    width: 270px;
     height: 270px;
     border-radius: 15px;
-    margin-top: 1rem    ;
+    margin-top: 1rem;
     gap: 1rem;
     padding: 1rem;
     background-color: #fff;
@@ -264,12 +303,14 @@ export default {
 }
 .below-btns{
     display: flex;
+    margin: 2rem 0;
     justify-content: space-between;
 }
 .finish-btn{
     padding: 12px 8px;
     border-radius: 10px;
     font-size: 14px;
+    width: 210px;
     border: solid 2px #64748B;
     background-color: #64748B;
     color: #fff;

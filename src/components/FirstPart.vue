@@ -52,6 +52,9 @@ export default{
     border-radius: 1rem;
     gap: 15px;
 }
+.title{
+    font-weight: bold;
+}
 .center-element{
     display: flex;
     align-items: center;
