@@ -143,9 +143,6 @@ export default {
 };
 </script>
 
-
-
-
 <style>
 .quiz{
     width: 1200px;
@@ -283,7 +280,6 @@ export default {
 .finish-quiz{
     display: flex;
     flex-direction: column;
-    text-align: start;
     justify-content: center;
     align-items: center;
     width: 270px;
